@@ -1,0 +1,23 @@
+# Gradle cache and build output
+.gradle/
+build/
+out/
+
+# IntelliJ / Eclipse / VSCode
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Fabric Loom run directories
+run/
+
+# Python cache
+__pycache__/
+*.pyc
