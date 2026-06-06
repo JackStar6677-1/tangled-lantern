@@ -1,0 +1,65 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Generate textures
+        run: |
+          pip install Pillow
+          python3 generate_textures.py
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Get version
+        id: version
+        run: echo "version=$(./gradlew properties -q | grep '^version:' | awk '{print $2}')" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "Tangled Lantern ${{ steps.version.outputs.version }}"
+          body: |
+            ## ✦ Tangled Lantern ${{ steps.version.outputs.version }}
+
+            Sky lanterns for Minecraft Java Edition — **Fabric 1.21.1**
+
+            ### Installation
+            1. Install [Fabric Loader](https://fabricmc.net/use/) for 1.21.1
+            2. Download [Fabric API](https://modrinth.com/mod/fabric-api)
+            3. Place both JARs in `.minecraft/mods/`
+
+            ### Crafting
+            ```
+               🧵
+            📄  🔦  📄
+               📄
+            → ×4 Sky Lanterns
+            ```
+          files: |
+            build/libs/tangled-lantern-*.jar
+          draft: false
+          prerelease: false

@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.7-SNAPSHOT'
+	id 'fabric-loom' version '1.7.4'
 	id 'maven-publish'
 }
 
@@ -10,7 +10,11 @@ base {
 	archivesName = project.archives_base_name
 }
 
-repositories {}
+repositories {
+	maven { url = 'https://maven.fabricmc.net/' }
+	maven { url = 'https://libraries.minecraft.net/' }
+	mavenCentral()
+}
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
