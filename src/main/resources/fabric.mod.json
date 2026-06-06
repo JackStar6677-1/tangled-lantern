@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "tangledlantern",
+  "version": "${version}",
+  "name": "Tangled Lantern",
+  "description": "Sky lanterns that float gently into the night sky.",
+  "authors": [],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.tangledlantern.TangledLantern"],
+    "client": ["com.tangledlantern.client.TangledLanternClient"]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "fabric-api": "*",
+    "minecraft": "~1.21.1",
+    "java": ">=21"
+  }
+}
