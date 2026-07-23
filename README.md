@@ -204,3 +204,5 @@ src/main/
 <p align="center">
   <sub>Made with ✦ for Minecraft Java Edition</sub>
 </p>
+
+<!-- Updated for 2026 active baseline maintenance -->
